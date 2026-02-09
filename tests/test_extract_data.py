@@ -93,6 +93,7 @@ def __compare_loaded_data(df_ts: ts.TimeSeries):
     __inferr_frequency(df_ts2.data)
     pd.testing.assert_frame_equal(df_ts.data, df_ts2.data)
 
+
 def test_extract_nora3_fpc():
     df_ts = ts.TimeSeries(lon=1.320, lat=53.324,start_time='2000-01-01', end_time='2000-01-01', product='NORA3_fpc')
     # Import data from thredds.met.no
@@ -172,6 +173,7 @@ def test_norkyst_800_v3():
     print(df_ts.lat_data, df_ts.lon_data,df_ts.data.shape)
     assert (df_ts.lat_data, df_ts.lon_data) == (64.5983217588851, 3.7289053730237156)
     assert df_ts.data.shape == (24, 101)
+    df_ts.data.index = df_ts.data.index.astype('datetime64[us]')
     __compare_loaded_data(df_ts)
 
 def test_norkyst_da_zdepth():
